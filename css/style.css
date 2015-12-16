@@ -1,0 +1,40 @@
+.logmod {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.logmod_logo {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.logo {
+    border: 2px solid #FFF;
+}
+
+.logmod__wrapper {
+  display: block;
+  background: #FFF;
+  position: relative;
+  width: 90%;
+  height: 50%;
+  border-radius: 4px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.logmod_banner_foot {
+    width: 100%;
+    text-align: right;
+    margin-top: 40px;
+    margin-right: 40px;
+}
