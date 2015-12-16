@@ -8,7 +8,9 @@ contract MonedaAlcala {
 	}
 	
 	mapping (address => User) public participants;
-	event Sent(address from, address to, uint amount);
+	event AmountSent(address from, address to, uint amount);
+	event UserAdded(address addr, string email, string id);
+	event UserDisabled(address addr, string email, string id);
 	
 	modifier onlyparticipants { if (!participants[msg.sender].active) throw; _ }
 		
@@ -18,11 +20,13 @@ contract MonedaAlcala {
 	
 	function addUser(address addr, string email, string id, uint amount) onlyparticipants{
 		participants[addr] = User(addr,amount,true,email,id);
+		UserAdded(addr,email,id);
 	}
 		
 	function disableUser(address user, address balanceReceiver) onlyparticipants returns (uint){
 		send(balanceReceiver, participants[user].balance);
 		participants[user].active = false;
+		UserDisabled(user,participants[user].email,participants[user].id);
 	}
 	
 	function consultBalance(address user) onlyparticipants returns (uint){
@@ -34,6 +38,7 @@ contract MonedaAlcala {
 		if (!participants[receiver].active) return;
         	participants[msg.sender].balance -= amount;
 		participants[receiver].balance += amount;
-        	Sent(msg.sender, receiver, amount);
+        	AmountSent(msg.sender, receiver, amount);
     }
+    
 }
