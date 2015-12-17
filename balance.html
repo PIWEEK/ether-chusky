@@ -13,7 +13,7 @@ and open the template in the editor.
         <script src="js/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="js/web3_relay_client.js"></script>
         <script type="text/javascript">
-            var web3 = new Web3('http://90.173.123.147:5000');
+            var web3 = new Web3('http://212.49.181.243:5000');
 
             var MonedaAlcalaDef = [{
                     "constant":true,
@@ -86,7 +86,7 @@ and open the template in the editor.
 
             var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
 
-            monedaAlcala.participants("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", function(err, result) {
+            monedaAlcala.participants("0xbc2137557ffe673820ebcc06fb91c35f2ca40551", function(err, result) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -95,10 +95,20 @@ and open the template in the editor.
                     $("#user_id").html(arrayRes[4]);
                     $("#user_balance").val(arrayRes[0]);
             
-                    console.log("Balance User: ", arrayRes);
+                    console.log("Balance Usuario Origen: ", arrayRes);
                 }
             });
     
+            // Comprobamos balance del destino
+            monedaAlcala.participants("0x4cf2f3cbb497b7722b43a898eb12171c04d84933", function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var arrayRes = jQuery.parseJSON(result);
+                    console.log("Balance Usuario Destino: ", arrayRes);
+                }
+            });
+            
             $( document ).ready(function() {
  
                 $("#btn_send_chuskis").click(function() {
@@ -136,12 +146,12 @@ and open the template in the editor.
                             });
                             
                             // Comprobamos balance del origen                            
-                            monedaAlcala.participants("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", function(err, result) {
+                            monedaAlcala.participants("0xbc2137557ffe673820ebcc06fb91c35f2ca40551", function(err, result) {
                                 if (err) {
                                     console.log(err);
                                 } else {
                                     var arrayRes = jQuery.parseJSON(result);
-                                    console.log("Balance Usuario Origen: ", arrayRes[4], " ",arrayRes[0]);
+                                    console.log("Balance Usuario Origen: ", arrayRes);
                                 }
                             });
                             
@@ -151,7 +161,7 @@ and open the template in the editor.
                                     console.log(err);
                                 } else {
                                     var arrayRes = jQuery.parseJSON(result);
-                                    console.log("Balance Usuario Destino ", arrayRes[4], " ",arrayRes[0]);
+                                    console.log("Balance Usuario Destino ", arrayRes);
                                 }
                             });
                         }
