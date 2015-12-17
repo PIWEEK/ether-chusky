@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PiWeek</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/web3_relay_client.js"></script>
+        <script type="text/javascript">
+            var web3 = new Web3('http://172.27.0.143:8545');
+
+    var MonedaAlcalaDef = [{
+        "constant":true,
+        "inputs":[{"name":"","type":"address"}],
+        "name":"participants",
+        "outputs":[{"name":"addr","type":"address"},{"name":"balance","type":"uint256"},{"name":"active","type":"bool"},{"name":"email","type":"string"},{"name":"id","type":"string"}],
+        "type":"function"
+    },{
+        "constant":false,
+        "inputs":[{"name":"user","type":"address"}],
+        "name":"consultBalance",
+        "outputs":[{"name":"","type":"uint256"}],
+        "type":"function"
+    },{
+        "constant":false,
+        "inputs":[{"name":"user","type":"address"},{"name":"balanceReceiver","type":"address"}],
+        "name":"disableUser",
+        "outputs":[{"name":"","type":"uint256"}],
+        "type":"function"
+    },{
+        "constant":false,
+        "inputs":[{"name":"addr","type":"address"},{"name":"email","type":"string"},{"name":"id","type":"string"},{"name":"amount","type":"uint256"}],
+        "name":"addUser",
+        "outputs":[],
+        "type":"function"
+    },{
+        "constant":false,
+        "inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],
+        "name":"send",
+        "outputs":[],
+        "type":"function"
+    },{
+        "inputs":[{"name":"email","type":"string"},{"name":"id","type":"string"}],
+        "type":"constructor"
+    },{
+        "anonymous":false,
+        "inputs":[{"indexed":false,"name":"from","type":"address"},{"indexed":false,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],
+        "name":"AmountSent",
+        "type":"event"
+    },{
+        "anonymous":false,
+        "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
+        "name":"UserAdded",
+        "type":"event"
+    },{
+        "anonymous":false,
+        "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
+        "name":"UserDisabled",
+        "type":"event"
+    }];
+    var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
+
+    var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
+
+    var result = monedaAlcala.consultBalance("0xbc2137557ffe673820ebcc06fb91c35f2ca40551");
+    //var result = monedaAlcala.participants("0x4cf2f3cbb497b7722b43a898eb12171c04d84933");
+    $("#balance_user").html("Balance: ",result);
+    console.log(result);
+        </script>
+    </head>
+    <body>
+        <div class="logmod">
+            
+            <div class="logmod_logo">
+                <img src="images/moneda-social.gif" alt="Logo" class="logo"/>               
+            </div>
+            
+            <div class="logmod__wrapper">
+                TODO write content
+                <span id="balance_user">xsxs: </span>
+            </div>
+            
+            <div class="logmod_banner_foot">
+                <a href="http://monedaalcala.org/" target="_blank"><img src="images/banner-moneda-alcala.png" alt="Banner"/></a>
+            </div>
+        </div>
+    </body>
+</html>
