@@ -13,65 +13,111 @@ and open the template in the editor.
         <script src="js/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="js/web3_relay_client.js"></script>
         <script type="text/javascript">
-            var web3 = new Web3('http://172.27.0.143:5000');
+            var web3 = new Web3('http://90.173.123.147:5000');
 
-    var MonedaAlcalaDef = [{
-        "constant":true,
-        "inputs":[{"name":"","type":"address"}],
-        "name":"participants",
-        "outputs":[{"name":"addr","type":"address"},{"name":"balance","type":"uint256"},{"name":"active","type":"bool"},{"name":"email","type":"string"},{"name":"id","type":"string"}],
-        "type":"function"
-    },{
-        "constant":false,
-        "inputs":[{"name":"user","type":"address"}],
-        "name":"consultBalance",
-        "outputs":[{"name":"","type":"uint256"}],
-        "type":"function"
-    },{
-        "constant":false,
-        "inputs":[{"name":"user","type":"address"},{"name":"balanceReceiver","type":"address"}],
-        "name":"disableUser",
-        "outputs":[{"name":"","type":"uint256"}],
-        "type":"function"
-    },{
-        "constant":false,
-        "inputs":[{"name":"addr","type":"address"},{"name":"email","type":"string"},{"name":"id","type":"string"},{"name":"amount","type":"uint256"}],
-        "name":"addUser",
-        "outputs":[],
-        "type":"function"
-    },{
-        "constant":false,
-        "inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],
-        "name":"send",
-        "outputs":[],
-        "type":"function"
-    },{
-        "inputs":[{"name":"email","type":"string"},{"name":"id","type":"string"}],
-        "type":"constructor"
-    },{
-        "anonymous":false,
-        "inputs":[{"indexed":false,"name":"from","type":"address"},{"indexed":false,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],
-        "name":"AmountSent",
-        "type":"event"
-    },{
-        "anonymous":false,
-        "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
-        "name":"UserAdded",
-        "type":"event"
-    },{
-        "anonymous":false,
-        "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
-        "name":"UserDisabled",
-        "type":"event"
-    }];
-    var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
+            var MonedaAlcalaDef = [{
+                    "constant":true,
+                    "inputs":[{"name":"","type":"address"}],
+                    "name":"participants",
+                    "outputs":[{"name":"balance","type":"uint256"},{"name":"active","type":"bool"},{"name":"admin","type":"bool"},{"name":"email","type":"string"},{"name":"id","type":"string"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"user","type":"address"}],
+                    "name":"consultBalance",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"user","type":"address"},{"name":"balanceReceiver","type":"address"}],
+                    "name":"disableUser",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],
+                    "name":"fundUser",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"addr","type":"address"}],
+                    "name":"getParticipant",
+                    "outputs":[{"name":"email","type":"string"},{"name":"id","type":"string"},{"name":"balance","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"user","type":"address"}],
+                    "name":"isActive","outputs":[{"name":"","type":"bool"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"addr","type":"address"},{"name":"email","type":"string"},{"name":"id","type":"string"},{"name":"amount","type":"uint256"}],
+                    "name":"addUser",
+                    "outputs":[],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],
+                    "name":"send",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "inputs":[{"name":"email","type":"string"},{"name":"id","type":"string"}],
+                    "type":"constructor"
+                },{
+                    "anonymous":false,
+                    "inputs":[{"indexed":false,"name":"from","type":"address"},{"indexed":false,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],
+                    "name":"AmountSent",
+                    "type":"event"
+                },{
+                    "anonymous":false,
+                    "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
+                    "name":"UserAdded",
+                    "type":"event"
+                },{
+                    "anonymous":false,
+                    "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
+                    "name":"UserDisabled",
+                    "type":"event"
+                }];
+            
+            var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
 
-    var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
+            var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
 
-    var result = monedaAlcala.consultBalance("0xbc2137557ffe673820ebcc06fb91c35f2ca40551");
-    //var result = monedaAlcala.participants("0x4cf2f3cbb497b7722b43a898eb12171c04d84933");
-    $("#balance_user").html("-Balance: ",result);
-    console.log(result);
+            /*monedaAlcala.addUser("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", "tio@pio.es", "tiopio", 500, function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("addUser:", result);
+                }
+            });
+
+            monedaAlcala.fundUser("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", 444, function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("fundUser:", result);
+                }
+            });
+
+            monedaAlcala.send("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", 5, function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("send:", result);
+                }
+            });*/
+            
+            monedaAlcala.consultBalance("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    $("#balance_user").html("-Balance: ",result);
+                    console.log("Balance:", result);
+                }
+            });                        
         </script>
     </head>
     <body>
