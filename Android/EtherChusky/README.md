@@ -1,0 +1,1 @@
+# Android client for Alcalá Local Coin Ethereum project
