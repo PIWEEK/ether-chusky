@@ -11,7 +11,7 @@ import com.triskelapps.etherchusky.util.Util;
  */
 public class BasePresenter {
 
-    Context context;
+    public Context context;
     public BaseView baseView;
 
     protected SharedPreferences getPrefs() {

@@ -24,4 +24,13 @@
 
     <string name="title_activity_main">Main Activity</string>
     <string name="your_account">Your account</string>
+    <string name="user">User</string>
+    <string name="balance">Balance</string>
+    <string name="transactions">Transactions</string>
+    <string name="amount">Amount (Chuskis)</string>
+    <string name="destination">Destination user</string>
+    <string name="pay">Pay</string>
+    <string name="invalid_amount">Invalid amount</string>
+    <string name="select_destination_user">Select destination user</string>
+    <string name="transaction">Transaction</string>
 </resources>

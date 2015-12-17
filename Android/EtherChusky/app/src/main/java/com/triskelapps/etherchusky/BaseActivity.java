@@ -64,7 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void showProgress(String message) {
 
-        progress = new ProgressDialog(getBaseContext());
+        progress = new ProgressDialog(this);
         progress.setMessage(message);
         progress.show();
     }

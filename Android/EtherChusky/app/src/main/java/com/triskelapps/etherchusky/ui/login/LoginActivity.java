@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.triskelapps.etherchusky.BaseActivity;
 import com.triskelapps.etherchusky.BasePresenter;
+import com.triskelapps.etherchusky.BuildConfig;
 import com.triskelapps.etherchusky.R;
 import com.triskelapps.etherchusky.ui.main.MainActivity;
 
@@ -55,6 +56,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tabLayout.addTab(tabLayout.newTab().setText(R.string.login).setTag(LoginPresenter.TAB_LOGIN));
 
         tabLayout.setOnTabSelectedListener(this);
+
+        if (BuildConfig.DEBUG) {
+            editEmail.setText("a@b.com");
+            editUsername.setText("aaa");
+            editPassword.setText("aaabbb");
+            editRepeatPassword.setText("aaabbb");
+
+            onSuccess();
+            finish();
+        }
 
     }
 
