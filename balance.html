@@ -80,55 +80,85 @@ and open the template in the editor.
                     "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
                     "name":"UserDisabled",
                     "type":"event"
-                }];
+            }];
             
             var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
 
             var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
 
-            /*monedaAlcala.addUser("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", "tio@pio.es", "tiopio", 500, function(err, result) {
+            monedaAlcala.participants("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", function(err, result) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log("addUser:", result);
-                }
-            });
-
-            monedaAlcala.fundUser("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", 444, function(err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("fundUser:", result);
-                }
-            });
-
-            monedaAlcala.send("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", 5, function(err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("send:", result);
-                }
-            });
+                    var arrayRes = jQuery.parseJSON(result);
+                        
+                    $("#user_id").html(arrayRes[4]);
+                    $("#user_balance").val(arrayRes[0]);
             
-            monedaAlcala.consultBalance("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", function(err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    $("#balance_user").html("-Balance: ",result);
-                    console.log("Balance:", result);
-                }
-            }); */   
-            
-            monedaAlcala.participants("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", function(err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    $("#balance_user").html("-Balance: ",result);
-                    console.log("Balance:", result);
+                    console.log("Balance User: ", arrayRes);
                 }
             });
     
-    
+            $( document ).ready(function() {
+ 
+                $("#btn_send_chuskis").click(function() {
+                    
+                    var send_chuskis = $("#send_chuskis").val();
+                    var user_balance = $("#user_balance").val();
+                    
+                    if(send_chuskis === undefined || send_chuskis === null || send_chuskis.length <= 0 || isNaN(send_chuskis)) {
+                        
+                        alert("Introduzca la cantidad a enviar");
+                        $("#send_chuskis").focus();
+                        
+                    } else {
+                        // Límite excedido
+                        if(parseInt(send_chuskis) > parseInt(user_balance)) {
+                            alert("No tienes tantos Chuskis");
+                        } else {
+                            
+                            var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
+
+                            var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
+
+                            // Envio del dinero
+                            monedaAlcala.send("0x4cf2f3cbb497b7722b43a898eb12171c04d84933", send_chuskis, function(err, result) {
+                                
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    
+                                    var balance_user_disp = parseInt(user_balance) - parseInt(send_chuskis);
+                                    $("#user_balance").val(balance_user_disp);
+            
+                                    console.log("Balance Usuario Disponible: ", balance_user_disp);
+                                }
+                            });
+                            
+                            // Comprobamos balance del origen                            
+                            monedaAlcala.participants("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", function(err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    var arrayRes = jQuery.parseJSON(result);
+                                    console.log("Balance Usuario Origen: ", arrayRes[4], " ",arrayRes[0]);
+                                }
+                            });
+                            
+                            // Comprobamos balance del destino
+                            monedaAlcala.participants("0x4cf2f3cbb497b7722b43a898eb12171c04d84933", function(err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    var arrayRes = jQuery.parseJSON(result);
+                                    console.log("Balance Usuario Destino ", arrayRes[4], " ",arrayRes[0]);
+                                }
+                            });
+                        }
+                    }
+                });
+ 
+            });
     
         </script>
     </head>
@@ -139,9 +169,19 @@ and open the template in the editor.
                 <img src="images/moneda-social.gif" alt="Logo" class="logo"/>               
             </div>
             
-            <div class="logmod__wrapper">
-                TODO write content
-                <span id="balance_user">xsxs: </span>
+            <div class="logmod_wrapper">
+                <div class="logmod_wrapper_header">
+                    Id usuario: <span id="user_id" class="logmod_wrapper_user_id"></span>
+                </div>
+                <div class="logmod_wrapper_body">
+                    <div>
+                        Saldo Disponible: <input id="user_balance" type="text" size="50" disabled class="logmod_input"/> Chuskis
+                    </div>
+                    <div style="margin-top: 30px;">
+                        Chuskis a enviar <input id="send_chuskis" type="text" size="50" class="logmod_input"/>
+                        <span class="logmod_sumbit" id="btn_send_chuskis">Enviar</span>
+                    </div>                    
+                </div>
             </div>
             
             <div class="logmod_banner_foot">

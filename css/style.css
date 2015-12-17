@@ -20,16 +20,17 @@
     border: 2px solid #FFF;
 }
 
-.logmod__wrapper {
-  display: block;
-  background: #FFF;
-  position: relative;
-  width: 90%;
-  height: 50%;
-  border-radius: 4px;
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
-  margin: 20px auto;
-  padding: 20px;
+.logmod_wrapper {
+    display: block;
+    background: #FFF;
+    position: relative;
+    width: 90%;
+    height: 50%;
+    border-radius: 4px;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    padding: 20px;
+    color: #555;    
 }
 
 .logmod_banner_foot {
@@ -37,4 +38,55 @@
     text-align: right;
     margin-top: 40px;
     margin-right: 40px;
+}
+
+.logmod_wrapper_header {
+    width: 100%;
+    font-size: 22px; 
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.logmod_wrapper_body {
+    width: 100%;
+    font-size: 17px; 
+    text-align: left;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+.logmod_wrapper_user_id {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.logmod_input {
+    font-size: 15px;
+    line-height: 19.2px;
+    color: #555;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-shadow: none;
+    box-sizing: border-box;
+    max-width: 15%;
+    height: auto;
+    border: 1px solid #B0B0B0;
+    padding: 2px;
+    cursor: text;
+    background-color: transparent;
+    color: rgba(75, 89, 102, 0.85);
+}
+
+.logmod_sumbit {
+    color: #FFF;
+    width: auto;
+    font-weight: 700;
+    font-size: 16px;
+    background: #4CAF50;
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
 }

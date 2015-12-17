@@ -8,6 +8,76 @@
         <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="js/web3_relay_client.js"></script>
         <script>
+            
+            var MonedaAlcalaDef = [{
+                    "constant":true,
+                    "inputs":[{"name":"","type":"address"}],
+                    "name":"participants",
+                    "outputs":[{"name":"balance","type":"uint256"},{"name":"active","type":"bool"},{"name":"admin","type":"bool"},{"name":"email","type":"string"},{"name":"id","type":"string"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"user","type":"address"}],
+                    "name":"consultBalance",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"user","type":"address"},{"name":"balanceReceiver","type":"address"}],
+                    "name":"disableUser",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],
+                    "name":"fundUser",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"addr","type":"address"}],
+                    "name":"getParticipant",
+                    "outputs":[{"name":"email","type":"string"},{"name":"id","type":"string"},{"name":"balance","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"user","type":"address"}],
+                    "name":"isActive","outputs":[{"name":"","type":"bool"}],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"addr","type":"address"},{"name":"email","type":"string"},{"name":"id","type":"string"},{"name":"amount","type":"uint256"}],
+                    "name":"addUser",
+                    "outputs":[],
+                    "type":"function"
+                },{
+                    "constant":false,
+                    "inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],
+                    "name":"send",
+                    "outputs":[{"name":"","type":"uint256"}],
+                    "type":"function"
+                },{
+                    "inputs":[{"name":"email","type":"string"},{"name":"id","type":"string"}],
+                    "type":"constructor"
+                },{
+                    "anonymous":false,
+                    "inputs":[{"indexed":false,"name":"from","type":"address"},{"indexed":false,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],
+                    "name":"AmountSent",
+                    "type":"event"
+                },{
+                    "anonymous":false,
+                    "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
+                    "name":"UserAdded",
+                    "type":"event"
+                },{
+                    "anonymous":false,
+                    "inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"email","type":"string"},{"indexed":false,"name":"id","type":"string"}],
+                    "name":"UserDisabled",
+                    "type":"event"
+            }];
+            
+            
+            
             $( document ).ready(function() {
  
                 $("#create").click(function() {
@@ -31,9 +101,23 @@
                         $("#create-alert").html("Las contraseñas deben ser iguales");
                     } else {
                         
+                        var web3 = new Web3('http://90.173.123.147:5000');
                         
+                        var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
+
+                        var monedaAlcala = MonedaAlcala.at("0xc06f22a9d5cac4cfccea58a403eb50ffc38a035d");
+                        
+                        monedaAlcala.addUser("0x1938e13c6a1ca64c938ef76de4c797a046a8aeae", user_email, user_id, "10000", function(err, result) {
+                            if (err) {
+                                console.log(err);
+                                $("#create-alert").html("Error al crear el usuario");
+                            } else {
+                                console.log("addUser:", result);
+                                window.location.href = "balance.html";
+                            }
+                        });
             
-                        window.location.href = "user.html";
+                        
                     }
                 });
  
