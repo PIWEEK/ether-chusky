@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PiWeek</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style_index.css">
+        <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/web3_relay_client.js"></script>
+        <script>
+            $( document ).ready(function() {
+ 
+                $("#create").click(function() {
+                    
+                    $("#create-alert").html("");
+        
+        
+                    var user_id = $("#create-user-id").val();
+                    var user_email = $("#create-user-email").val();
+                    var user_pw = $("#create-user-pw").val();
+                    var user_pw_repeat = $("#create-user-pw-repeat").val();
+                    
+                    if(user_id === undefined || user_id === null || user_id.length <= 0) {
+                        $("#create-alert").html("Introduzca el usuario");
+                    } else if(user_email === undefined || user_email === null || user_email.length <= 0) {
+                        $("#create-alert").html("Introduzca el email");
+                    } else if(user_pw === undefined || user_pw === null || user_pw.length <= 0 || 
+                            user_pw_repeat === undefined || user_pw_repeat === null || user_pw_repeat.length <= 0) {
+                        $("#create-alert").html("Introduzca la contraseña");
+                    } else if(user_pw !== user_pw_repeat) {
+                        $("#create-alert").html("Las contraseñas deben ser iguales");
+                    } else {
+                        
+                        
+            
+                        window.location.href = "user.html";
+                    }
+                });
+ 
+                $("#login").click(function() {
+                    
+                    $("#login-alert").html("");
+                    
+                    var user_id = $("#login-user-id").val();
+                    var user_pw = $("#login-user-pw").val();
+        
+                    if(user_id === undefined || user_id === null || user_id.length <= 0) {
+                        $("#login-alert").html("Introduzca el usuario");
+                    } else if(user_pw === undefined || user_pw === null || user_pw.length <= 0) {
+                        $("#login-alert").html("Introduzca la contraseña");
+                    } else {
+                        
+                        
+            
+            
+                        window.location.href = "user.html";
+                    }
+                    
+                });
+ 
+            });    
+</script>
+    </head>
+    <body>
+        <div class="logmod">
+
+            <div class="logmod_logo">
+                <img src="images/moneda-social.gif" alt="Logo" class="logo"/>                
+            </div>
+
+            <div class="logmod__wrapper">
+                <div class="logmod__container">
+                    <ul class="logmod__tabs">
+                        <li data-tabtar="lgm-2"><a href="#">Login</a></li>
+                        <li data-tabtar="lgm-1"><a href="#">Crear cuenta</a></li>
+                    </ul>
+                    <div class="logmod__tab-wrapper">
+                        <div class="logmod__tab lgm-1">
+                            <div class="logmod__heading">
+                                <span class="logmod__heading-subtitle">Introduce tus datos personales <strong>para crear una cuenta</strong></span>
+                            </div>
+                            <div class="logmod__form">
+                                <form accept-charset="utf-8" action="#" class="simform">
+                                    <div class="sminputs">
+                                        <div class="input full">
+                                            <label for="create-user-id">Usuario</label>
+                                            <input maxlength="255" id="create-user-id" type="text" size="50" />
+                                        </div>
+                                    </div>
+                                    <div class="sminputs">
+                                        <div class="input full">
+                                            <label for="create-user-name">Email</label>
+                                            <input maxlength="255" id="create-user-email" type="email" size="50" />
+                                        </div>
+                                    </div>
+                                    <div class="sminputs">
+                                        <div class="input">
+                                            <label for="create-user-pw">Contraseña</label>
+                                            <input maxlength="255" id="create-user-pw" type="password" size="50" />
+                                        </div>
+                                        <div class="input">
+                                            <label for="create-user-pw-repeat">Repetir contraseña</label>
+                                            <input maxlength="255" id="create-user-pw-repeat" type="password" size="50" />
+                                        </div>
+                                    </div>
+                                    <div class="simform__actions">
+                                        <span class="sumbit" id="create">Crear cuenta</span>
+                                        <!--<input class="sumbit" name="commit" type="submit" value="Crear cuenta" id="create" />-->
+                                        <span class="simform__actions-alert" id="create-alert"></span>
+                                    </div> 
+                                </form>
+                            </div> 
+                        </div>
+                        <div class="logmod__tab lgm-2">
+                            <div class="logmod__heading">
+                                <span class="logmod__heading-subtitle">Introduce tu usuario y tu contraseña <strong>para iniciar sesión</strong></span>
+                            </div> 
+                            <div class="logmod__form">
+                                <form accept-charset="utf-8" action="#" class="simform">
+                                    <div class="sminputs">
+                                        <div class="input full">
+                                            <label for="login-user-id">Usuario</label>
+                                            <input maxlength="255" id="login-user-id" type="text" size="50" />
+                                        </div>
+                                    </div>
+                                    <div class="sminputs">
+                                        <div class="input full">
+                                            <label for="login-user-pw">Contraseña</label>
+                                            <input maxlength="15" id="login-user-pw" type="password" size="50" />
+                                            <!--<span class="hide-password">Mostrar</span>-->
+                                        </div>
+                                    </div>
+                                    <div class="simform__actions">
+                                        <span class="sumbit" id="login">Iniciar sesión</span>
+                                        <span class="simform__actions-alert" id="login-alert"></span>
+                                        <!--<input class="sumbit" name="commit" type="submit" value="Iniciar sesión" id="login" />-->
+                                        <!--<span class="simform__actions-sidetext"><a class="special" role="link" href="#">¿Olvidaste tu contraseña?<br>Pulsa aquí</a></span>-->
+                                    </div> 
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="logmod_banner_foot">
+                <a href="http://monedaalcala.org/" target="_blank"><img src="images/banner-moneda-alcala.png" alt="Banner"/></a>
+            </div>
+        </div>
+        <script src="js/index.js"></script>
+    </body>
+</html>
