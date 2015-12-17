@@ -108,7 +108,7 @@ and open the template in the editor.
                 } else {
                     console.log("send:", result);
                 }
-            });*/
+            });
             
             monedaAlcala.consultBalance("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", function(err, result) {
                 if (err) {
@@ -117,7 +117,19 @@ and open the template in the editor.
                     $("#balance_user").html("-Balance: ",result);
                     console.log("Balance:", result);
                 }
-            });                        
+            }); */   
+            
+            monedaAlcala.participants("0x2c52900da7fac8d6046085c69c2ffd6dd478f3dc", function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    $("#balance_user").html("-Balance: ",result);
+                    console.log("Balance:", result);
+                }
+            });
+    
+    
+    
         </script>
     </head>
     <body>
