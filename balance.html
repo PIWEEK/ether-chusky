@@ -10,7 +10,7 @@ and open the template in the editor.
         <title>PiWeek</title>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
-        <script src="js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/web3_relay_client.js"></script>
         <script type="text/javascript">
             var web3 = new Web3('http://212.49.181.243:5000');
@@ -90,6 +90,9 @@ and open the template in the editor.
                 if (err) {
                     console.log(err);
                 } else {
+                    
+                    console.log("Result: ", result);
+                    
                     var arrayRes = jQuery.parseJSON(result);
                         
                     $("#user_id").html(arrayRes[4]);
@@ -143,7 +146,9 @@ and open the template in the editor.
             
                                     console.log("Balance Usuario Disponible: ", balance_user_disp);
                                     
-                                    alert('Traspaso de chuskis efectuado correctamente, en unos segundos la transacción será efectiva.');
+                                    //alert('Traspaso de chuskis efectuado correctamente, en unos segundos la transacción será efectiva.');
+                                    $("#capa_cargando").css("visibility","visible");
+                                    $("#imagendiv").css("visibility","visible");                                    
                                 }
                             });                                                       
                         }
@@ -174,6 +179,10 @@ and open the template in the editor.
                         <span class="logmod_sumbit" id="btn_send_chuskis">Enviar</span>
                     </div>                    
                 </div>
+                
+                <div id="capa_cargando" class="clase_cargando"></div>
+                <div id="imagendiv" class="imagen"></div>
+                
             </div>
             
             <div class="logmod_banner_foot">

@@ -2906,7 +2906,8 @@
 	    var xmlhttp = new XMLHttpRequest();
 
 	    xmlhttp.addEventListener("load", function() {
-	        cbOk(JSON.parse(this.responseText));
+	        console.log(typeof(this.responseText))
+                cbOk(JSON.parse(this.responseText));
 	    });
 
 	    xmlhttp.open(method, this.baseUrl + path, true);

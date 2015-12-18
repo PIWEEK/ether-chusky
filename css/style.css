@@ -90,3 +90,33 @@
     border: none;
     cursor: pointer;
 }
+
+
+
+.clase_cargando {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    z-index: 1000;
+    visibility:hidden;
+    background: #000000;
+    z-index: 1000;
+    opacity: .10;
+    -moz-opacity: 0.10;
+    filter: alpha(opacity = 10);
+}
+.imagen {
+    position:absolute;
+    visibility:hidden;
+    display: block;
+    top: 40%;
+    left: 45%;
+    width: 128px;
+    height: 128px;
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    text-align:center;
+    z-index: 1001;
+}
