@@ -124,7 +124,7 @@ and open the template in the editor.
                     } else {
                         // Límite excedido
                         if(parseInt(send_chuskis) > parseInt(user_balance)) {
-                            alert("No tienes tantos Chuskis");
+                            alert("Dónde vas figura!?? ...que no tienes tantos Chuskis!!");
                         } else {
                             
                             var MonedaAlcala = web3.eth.contract(MonedaAlcalaDef);
@@ -142,28 +142,10 @@ and open the template in the editor.
                                     $("#user_balance").val(balance_user_disp);
             
                                     console.log("Balance Usuario Disponible: ", balance_user_disp);
+                                    
+                                    alert('Traspaso de chuskis efectuado correctamente, en unos segundos la transacción será efectiva.');
                                 }
-                            });
-                            
-                            // Comprobamos balance del origen                            
-                            monedaAlcala.participants("0xbc2137557ffe673820ebcc06fb91c35f2ca40551", function(err, result) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    var arrayRes = jQuery.parseJSON(result);
-                                    console.log("Balance Usuario Origen: ", arrayRes);
-                                }
-                            });
-                            
-                            // Comprobamos balance del destino
-                            monedaAlcala.participants("0x4cf2f3cbb497b7722b43a898eb12171c04d84933", function(err, result) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    var arrayRes = jQuery.parseJSON(result);
-                                    console.log("Balance Usuario Destino ", arrayRes);
-                                }
-                            });
+                            });                                                       
                         }
                     }
                 });
