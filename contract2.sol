@@ -49,7 +49,9 @@ contract MonedaAlcala {
 		participants[user].active = false;
 		int index = findAddressIndex(user);
 		if (index != -1){
-	        delete addresses[uint(index)];
+		    uint i = uint(index);
+	        delete addresses[i];
+	        addresses.length--;
 		}
 		UserDisabled(user,participants[user].email,participants[user].id);
 		return amount;
@@ -82,7 +84,7 @@ contract MonedaAlcala {
 	}
 	
 	//auxiliar internal function to retrieve an index in the addresses array form its address
-	function findAddressIndex(address addr) internal returns(int){
+	function findAddressIndex(address addr) returns(int){
 	    for (uint i = 0; i < addresses.length; i++){
 	        if (addresses[i] == addr) return int(i); 
 	    }
