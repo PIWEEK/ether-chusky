@@ -10,7 +10,7 @@ contract MonedaAlcala {
 	
 	//map with all the users
 	//is public, can be accessed form web3, in future versions it should be secured
-	mapping (address => User) participants;
+	mapping (address => User) public participants;
 	address[] addresses;
 	
 	//event sent to web3 to inform that a transaction has been made
