@@ -28,7 +28,7 @@ contract MonedaAlcala {
 	//builder of the contract, adds also the invoking address 
 	//as admis, so it should be the main address of the node
 	function MonedaAlcala(bytes32 email, bytes32 id){
-	    if((email=="")||(id=="")) return;
+	    if((email=="")||(id=="")) throw;
 	    participants.push(User(msg.sender,0,true,true,email,id));
 	}
 	
@@ -70,7 +70,7 @@ contract MonedaAlcala {
 	    if (!participants[i].active) return;
 	    uint amount = participants[i].balance;
 		send(balanceReceiver, amount);
-		participants[i].active = false;
+		delete participants[i];
 		UserDisabled(user,participants[i].email,participants[i].id);
 		return amount;
 	}
